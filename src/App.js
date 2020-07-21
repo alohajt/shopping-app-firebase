@@ -44,6 +44,17 @@ const fakeApi = {
   }
 }
 
+class BottomBar extends Component {
+  render() {
+    return (
+      <div className="bottom-bar"> 
+        <Link className="bottom-bar-button" to="/">首页</Link>
+        <Link className="bottom-bar-button" to="/shopping_car">购物车</Link>
+      </div>
+    )
+  }
+}
+
 class Nav extends Component {
   render() {
     return (
@@ -55,7 +66,7 @@ class Nav extends Component {
             <div className="nav">
               {
                 isRenderButton ? (
-                  <button className="goback">{"<"}</button>
+                  <button className="goback" onClick={routeProps.history.goBack}>{"<"}</button>
                 ) : ""
               }
               <p className="page-title">首页</p>
@@ -75,6 +86,7 @@ class App extends Component {
       <Router>
         <div>
           <Nav></Nav>
+          <BottomBar></BottomBar>
         </div>
       </Router>
 
