@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './reset.css'
 import './App.css';
 
 import {
@@ -13,7 +14,7 @@ const fakeApi = {
     name: "Apple iPhone 11 Pro (64GB, Midnight Green) [Carrier Locked] + Carrier Subscription [Cricket Wireless] ($10/Month Amazon Gift Card Credit)",
     price: "$999",
     img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone11-white-select-2019?wid=834&hei=1000&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1566956148115",
-    id: 1
+    id: "1"
   }],
   //购物车里的商品列表
   shoppingCar: [],
@@ -140,6 +141,77 @@ class ListView extends Component {
   }
 }
 
+class DetailView extends Component {
+  state = {
+    data: {}
+  }
+  componentWillMount() {
+    var id = this.props.match.params.id
+    console.log(id);
+    fakeApi.getDetail(id, (data) => {
+      this.setState({
+        data: data ? data : {}
+      })
+    })
+  }
+  onAddToShoppingCar(id) {
+    fakeApi.add(id, () => {
+      this.props.history.push('/shopping_car') //Link
+    })
+  }
+  render() {
+    const { data } = this.state
+    return (
+      <div className="detail-view">
+        <img className="detail-img" src={data.img}></img>
+        <h4 className="detail-name">{data.name}</h4>
+        <p className="detail-price">{data.price}</p>
+        <div className="bottom-bar">
+          <button className="bottom-button" onClick={() => this.onAddToShoppingCar(data.id)}>加入购物车</button>
+          <button className="bottom-button" id="buynow">立即购买</button>
+
+        </div>
+      </div>
+    )
+  }
+}
+
+
+class ShoppingCarView extends Component {
+  state = {
+    data: []
+  }
+  componentWillMount() {
+    fakeApi.getShoppingCar((data) => {
+      this.setState({
+        data: data
+      })
+    })
+  }
+
+  render() {
+    const { data } = this.state
+    return (
+      <ul className="shopping-view">
+        {
+          data.map((v, k) => (
+            <Link to={`/detail/${v.id}`} key={v.id + k}>
+              <li className="shopping-item">
+                <img className="item-img" src={v.img}></img>
+                <div className="item-wrap">
+                  <p className="item-name">{v.name}</p>
+                  <p className="item-price">{v.price}</p>
+                </div>
+              </li>
+            </Link>
+
+          ))
+        }
+      </ul>
+    )
+  }
+}
+
 class App extends Component {
   render() {
     return (
@@ -149,6 +221,8 @@ class App extends Component {
           <div className="App-main-view">
             <Route className="main-view" path="/" exact component={IndexView}></Route>
             <Route className="main-view" path="/list" exact component={ListView}></Route>
+            <Route className="main-view" path="/detail/:id" exact component={DetailView}></Route>
+            <Route className="main-view" path="/shopping_car" exact component={ShoppingCarView}></Route>
 
           </div>
           <Route path="/" exact component={BottomBar}></Route>
