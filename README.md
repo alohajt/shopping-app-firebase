@@ -19,4 +19,3 @@ This is my first time using React-Router in React.js. Linking webpages while pas
 
 # Deployment
 `npm start`. 
-Live Website:
