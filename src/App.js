@@ -8,14 +8,42 @@ import {
   Route
 } from 'react-router-dom'
 
+// import uuid from 'uuid/v1'
+import { v4 as uuidv4 } from 'uuid';
+
 const fakeApi = {
   //全部商品列表
   list: [{
-    name: "Apple iPhone 11 Pro (64GB, Midnight Green) [Carrier Locked] + Carrier Subscription [Cricket Wireless] ($10/Month Amazon Gift Card Credit)",
-    price: "$999",
-    img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone11-white-select-2019?wid=834&hei=1000&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1566956148115",
-    id: "1"
-  }],
+    name: "Apple iPad Pro (12.9-inch, Wi-Fi + Cellular, 1TB) - Space Gray (4th Generation)",
+    price: "$1649",
+    img: "https://images-na.ssl-images-amazon.com/images/I/81Pi4nhjlwL._AC_SL1500_.jpg",
+    id: uuidv4()
+  },
+  {
+    name: "Apple AirPods Pro",
+    price: "$229.95",
+    img: "https://images-na.ssl-images-amazon.com/images/I/71zny7BTRlL._AC_SL1500_.jpg",
+    id: uuidv4()
+  },
+  {
+    name: "Apple Watch Series 3 (GPS, 38mm) - Space Gray Aluminum Case with Black Sport Band",
+    price: "$169",
+    img: "https://images-na.ssl-images-amazon.com/images/I/71fwbMm1NBL._AC_SL1500_.jpg",
+    id: uuidv4()
+  },
+  {
+    name: "Apple MacBook Air (13-inch, 8GB RAM, 256GB SSD Storage) - Space Gray (Latest Model)",
+    price: "$949.00",
+    img: "https://images-na.ssl-images-amazon.com/images/I/71k3fJh5EwL._AC_SX679_.jpg",
+    id: uuidv4()
+  },
+  {
+    name: "App Store & iTunes Gift Cards - Email Delivery",
+    price: "$25 - $100",
+    img: "https://images-na.ssl-images-amazon.com/images/I/51f90ufUD9L.jpg",
+    id: uuidv4()
+  }
+  ],
   //购物车里的商品列表
   shoppingCar: [],
 
@@ -49,8 +77,8 @@ class BottomBar extends Component {
   render() {
     return (
       <div className="bottom-bar">
-        <Link className="bottom-bar-button" to="/">首页</Link>
-        <Link className="bottom-bar-button" to="/shopping_car">购物车</Link>
+        <Link className="bottom-bar-button" to="/">Home</Link>
+        <Link className="bottom-bar-button" to="/shopping_car">Shopping Cart</Link>
       </div>
     )
   }
@@ -67,16 +95,17 @@ class Nav extends Component {
           var pageName = ""
           switch (pathname) {
             case "/":
-              pageName = "首页"
+              pageName = "Home"
               break
             case "/shopping_car":
-              pageName = "购物车"
+              pageName = "Shopping Cart"
               break
             case "/list":
-              pageName = "商品列表"
+              pageName = "Product List"
               break
             default:
-              pageName = "No such page 404"
+              pageName = "Product"
+            // pageName = "No such page 404"
           }
           return (
             <div className="nav">
@@ -89,9 +118,7 @@ class Nav extends Component {
             </div>
           )
         }}>
-
       </Route>
-
     )
   }
 }
@@ -101,7 +128,7 @@ class IndexView extends Component {
     return (
       <ul>
         <li className="index-item">
-          <Link to="/list" className="index-item-link">去到列表</Link>
+          <Link to="/list" className="index-item-link">Enter Apple Products</Link>
         </li>
       </ul>
     )
@@ -167,15 +194,13 @@ class DetailView extends Component {
         <h4 className="detail-name">{data.name}</h4>
         <p className="detail-price">{data.price}</p>
         <div className="bottom-bar">
-          <button className="bottom-button" onClick={() => this.onAddToShoppingCar(data.id)}>加入购物车</button>
-          <button className="bottom-button" id="buynow">立即购买</button>
-
+          <button className="bottom-button" onClick={() => this.onAddToShoppingCar(data.id)}>Add to Cart</button>
+          <button className="bottom-button" id="buynow">Buy Now</button>
         </div>
       </div>
     )
   }
 }
-
 
 class ShoppingCarView extends Component {
   state = {
@@ -223,7 +248,6 @@ class App extends Component {
             <Route className="main-view" path="/list" exact component={ListView}></Route>
             <Route className="main-view" path="/detail/:id" exact component={DetailView}></Route>
             <Route className="main-view" path="/shopping_car" exact component={ShoppingCarView}></Route>
-
           </div>
           <Route path="/" exact component={BottomBar}></Route>
         </div>

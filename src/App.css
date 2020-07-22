@@ -136,19 +136,23 @@ button:active {
 }
 
 .detail-view .detail-img {
-    width: 100%;
+    padding: 20px 0;
+    width: 50vw;
 }
+
 
 .detail-view .detail-name {
     width: 90%;
     text-align: left;
     margin: 20px 0;
+    font-size: 3em;
 }
 
 .detail-view .detail-price {
     width: 90%;
     text-align: left;
     color: red;
+    font-size: 3em;
 }
 
 .detail-view .bottom-bar {
