@@ -1,5 +1,5 @@
 # shopping-app-firebase
-This small app is for purchasing Apple products. I wrote this app to practice using React.js and React-Link & Route & BrowserRouter.  
+This multipage app is for purchasing Apple products. I wrote this app to practice using React.js and React-Link & Route & BrowserRouter.  
 
 # Build with 
 Frontend: React.js, React-Link & Route & BrowserRouter, uuidv4, Responsive Web Design. 
