@@ -1,11 +1,11 @@
 # shopping-app-firebase
-This small app is for purchasing Apple products. I wrote this app to practice using React.js and React-Router. 
+This small app is for purchasing Apple products. I wrote this app to practice using React.js and React-Link & Route & BrowserRouter. 
 
 Live Website:  
 2-min Video Demo:  
 
 # Build with 
-Frontend: React.js, React-Router. 
+Frontend: React.js, React-Link & Route & BrowserRouter, uuidv4, Responsive Web Design. 
 
 # App Features
 Add to shopping cart:  
